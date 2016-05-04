@@ -10,6 +10,7 @@ var playing = require('./playing.js');
 var findGNN = require('./findGNN.js');
 var steamSales = require('./steam.js');
 var review = require('./review.js');
+var stuck = require('./stuck.js');
 var msgLog = {};
 
 bot.on('ready', discordReady);
@@ -41,8 +42,10 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	var findGNNResult = findGNN.findGNN(msg);
 	var steamResult = steamSales.findSales(msg);
 	var reviewResult = review.review(msg);
+	var stuckResult = stuck.stuck(msg);
 	
 	if (reviewResult.value) say(chID, reviewResult.msg);
+	else if (stuckResult.value) say(chID, stuck.msg);
 	else if (steamResult) say(chID, steamResult.title + "\n" + steamResult.link);
 	else if (findGNNResult) say(chID, findGNNResult.link);
     else if (playingResult.value) say(chID, playingResult.msg);
