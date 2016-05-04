@@ -1,0 +1,9 @@
+Folder:
+	./js -> 除了main以外的code都放這裡
+	./js/data -> 資料字串、保留字串等
+	
+File:
+	main.js -> 處理Discord Client
+	msgProcess.js -> 處理訊息是否需要回應，呼叫對應的函式
+	procGreeting.js -> 處理見面語
+	procEnding.js -> 處理結束對話語  

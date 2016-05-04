@@ -1,0 +1,24 @@
+<word>
+<detect>
+    <skill>full</skill>
+    <skill>p掉</skill>
+    <skill>打過</skill>
+    <lucky>抽中</lucky>
+    <lucky>抽到</lucky>
+    <sad>qq</sad>
+    <sad>miss</sad>
+	<sad>我什麼都沒有</sad>
+</detect>
+<return>
+    <skill>OP</skill>
+    <skill>好強</skill>
+    <common>太狂了</common>
+    <skill>好厲害</skill>
+    <lucky>真幸運</lucky>
+    <lucky>太臉了</lucky>
+    <lucky>你歐洲人啊</lucky>
+    <common>恭喜阿</common>
+    <comfort>別難過</comfort>
+	<comfort>我懂QQ</comfort>
+</return>
+</word>
