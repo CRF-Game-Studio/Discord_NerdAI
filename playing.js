@@ -5,7 +5,6 @@ var strReturn = {};
 
 function dividType(msg) {
     msg = msg.toLowerCase();
-    console.log(strDectect.sad);
     for (var i in strDectect.skill)
         if (msg.includes(strDectect.skill[i])) return 1;
     for (var i in strDectect.lucky)
