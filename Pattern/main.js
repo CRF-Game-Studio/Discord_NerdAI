@@ -31,4 +31,5 @@ function loadPattern() {
 function matchPattern(msg) {
 	
 }
+
 loadPattern();
