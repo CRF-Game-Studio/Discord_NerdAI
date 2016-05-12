@@ -12,6 +12,7 @@ var steamSales = require('./steam.js');
 var review = require('./review.js');
 var stuck = require('./stuck.js');
 var msgLog = {};
+var pattern = require('./pattern/pattern.js');
 
 bot.on('ready', discordReady);
 bot.on('message', discordMsg);
@@ -43,8 +44,17 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	var steamResult = steamSales.findSales(msg);
 	var reviewResult = review.review(msg);
 	var stuckResult = stuck.stuck(msg);
-	
-	if (reviewResult.value) say(chID, reviewResult.msg);
+	var patternResult = pattern.matchPattern(msg);
+	console.log(patternResult);
+	if (patternResult.match == true) {
+		
+		if (patternResult.result == "GameDifficult")
+			say(chID, "你是在說" + patternResult.slot[0] + "的難度" + patternResult.slot[1] + patternResult.slot[2] + "嗎?");
+		else if (patternResult.result == "GameStuck")
+			say(chID, "你是在說" + patternResult.slot[0] + "怎麼打都" + patternResult.slot[2] + "嗎？");
+		else if (patternResult.result == "GameInfo")
+			say(chID, "你是說" + patternResult.slot[0] + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎？");	
+	} else if (reviewResult.value) say(chID, reviewResult.msg);
 	else if (stuckResult.value) say(chID, stuck.msg);
 	else if (steamResult) say(chID, steamResult.title + "\n" + steamResult.link);
 	else if (findGNNResult) say(chID, findGNNResult.link);
