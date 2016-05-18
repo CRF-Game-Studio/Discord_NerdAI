@@ -12,7 +12,7 @@ var steamSales = require('./steam.js');
 var review = require('./review.js');
 var stuck = require('./stuck.js');
 var msgLog = {};
-var pattern = require('./pattern/pattern.js');
+var pattern = require('./pattern.js');
 
 bot.on('ready', discordReady);
 bot.on('message', discordMsg);
