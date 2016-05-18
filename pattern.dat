@@ -1,5 +1,5 @@
 -GameDifficult @game &正程度副詞 &困難形容詞
 -GameDifficult @game &非正程度副詞 &簡易形容詞
--GameStuck @game |都,各種 #打不過,破不了,full不掉,一直死
+-GameStuck #我 @game |都,各種 #打不過,破不了,full不掉,一直死
 -GameInfo @game &時間副詞 #出了,推出 #新 #系統,角色,職業,卡片,寵物
 -GamePlay #我把 @game #full掉,p掉,打過 |了

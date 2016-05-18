@@ -115,5 +115,5 @@ Pattern.prototype.matchSlot = function (str, iPattern, iSlot) {
 	return result;
 }
 module.exports = new Pattern;
-var p = new Pattern;
-console.log(p.matchPattern("我把杏之歌full掉了"));
+// var p = new Pattern;
+// console.log(p.matchPattern("我把杏之歌full掉了"));

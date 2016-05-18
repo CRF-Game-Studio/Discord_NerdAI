@@ -11,8 +11,9 @@ var findGNN = require('./findGNN.js');
 var steamSales = require('./steam.js');
 var review = require('./review.js');
 var stuck = require('./stuck.js');
-var msgLog = {};
+var msgLog = require('./MessageLog.js');
 var pattern = require('./pattern.js');
+var guideRecord = require('./GuideRecord.js');
 
 bot.on('ready', discordReady);
 bot.on('message', discordMsg);
@@ -35,28 +36,47 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	if (!isProcessRequire(user, userID, chID)) return;
     if (msg.toLowerCase().includes("count"))
         return say(chID, msgCount(user, userID, msg.substr(6, msg.length - 7)));
-    addLog(userID, msg);
+	
+	if (msg != "over" && msgLog.getLastLogType(userID) == "GamePlay") {
+		msgLog.addLog(userID, msg, "GamePlay", "@last");
+		guideRecord.addGuide(msgLog.getLastSubject(userID), user, msg);
+		return;
+	} else if (msg == "over") {
+		say(chID, "謝謝你提供的策略");
+		console.log(guideRecord.game);
+		msgLog.addLog(userID, msg, "GamePlayEnd");
+		return;
+	}
 	
 	var greetingResult = greeting.greeting(msg);
 	var endingResult = ending.ending(msg);
-    var playingResult = playing.playing(msg);
 	var findGNNResult = findGNN.findGNN(msg);
 	var steamResult = steamSales.findSales(msg);
 	var reviewResult = review.review(msg);
 	var stuckResult = stuck.stuck(msg);
 	var patternResult = pattern.matchPattern(msg);
+	
 	console.log(patternResult);
+	var m, type, subject;
 	if (patternResult.match == true) {
-		var msg;
+		type = patternResult.result;
 		if (patternResult.result == "GameDifficult")
-			msg = "你是在說" + patternResult.getTarget() + "的難度" + patternResult.slot[1] + patternResult.slot[2] + "嗎?";
-		else if (patternResult.result == "GameStuck")
-			msg = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[2] + "嗎？";
-		else if (patternResult.result == "GameInfo")
-			msg = "你是說" + patternResult.getTarget() + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎？";
-		else if (patternResult.result == "GamePlay")
-			msg = "恭喜你打過了" + patternResult.getTarget() + "!";
-		say(chID, msg);
+			m = "你是在說" + patternResult.getTarget() + "的難度" + patternResult.slot[1] + patternResult.slot[2] + "嗎?";
+		else if (patternResult.result == "GameStuck") {
+			var tGame = patternResult.getTarget();
+			if (guideRecord.guide[tGame])
+				m =  guideRecord.provide[tGame][0] + "說他打過了：" + guideRecord.guide[tGame][guideRecord.provide[tGame][0]].concat();
+			else
+				m = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎？";
+		} else if (patternResult.result == "GameInfo")
+			m = "你是說" + patternResult.getTarget() + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎？";
+		else if (patternResult.result == "GamePlay") {
+			m = "恭喜你打過了" + patternResult.getTarget() + "!";
+			say(chID, m);
+			m = "可以教我嗎? ";
+		}	
+		subject = patternResult.getTarget();
+		say(chID, m);
 	} else if (reviewResult.value) say(chID, reviewResult.msg);
 	else if (stuckResult.value) say(chID, stuck.msg);
 	else if (steamResult) say(chID, steamResult.title + "\n" + steamResult.link);
@@ -67,6 +87,9 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 		msg = changeView(msg);
 		say(chID, "為什麼你覺得" + msg + "？");
 	}
+	
+	msgLog.addLog(userID, msg, type, subject);
+	msgLog.print();
 }
 
 function isProcessRequire(user, userID, chID) {
@@ -93,23 +116,6 @@ function changeView(msg) {
 		while (msg.includes("0x" + i))
 			msg = msg.replace("0x" + i, you_I[i]);
 	return msg;
-}
-
-function addLog(userID, msg) {
-    if (msgLog[userID] == undefined) {
-        msgLog[userID] = {};
-        msgLog[userID].msg = [];
-    }
-    msgLog[userID].msg.push(msg);
-    console.log(msgLog);
-}
-
-function msgCount(user, userID, msg) {
-    var sum = 0;
-    for (var i = 0; i < msgLog[userID].msg.length; i++)
-        if (msgLog[userID].msg[i].includes(msg))
-            sum++;
-    return user + "已經說了「" + msg + "」" + sum + "次了！";  
 }
 
 function say(ch, ms) {
