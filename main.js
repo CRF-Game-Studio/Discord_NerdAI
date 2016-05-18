@@ -47,18 +47,20 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	var patternResult = pattern.matchPattern(msg);
 	console.log(patternResult);
 	if (patternResult.match == true) {
-		
+		var msg;
 		if (patternResult.result == "GameDifficult")
-			say(chID, "你是在說" + patternResult.slot[0] + "的難度" + patternResult.slot[1] + patternResult.slot[2] + "嗎?");
+			msg = "你是在說" + patternResult.getTarget() + "的難度" + patternResult.slot[1] + patternResult.slot[2] + "嗎?";
 		else if (patternResult.result == "GameStuck")
-			say(chID, "你是在說" + patternResult.slot[0] + "怎麼打都" + patternResult.slot[2] + "嗎？");
+			msg = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[2] + "嗎？";
 		else if (patternResult.result == "GameInfo")
-			say(chID, "你是說" + patternResult.slot[0] + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎？");	
+			msg = "你是說" + patternResult.getTarget() + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎？";
+		else if (patternResult.result == "GamePlay")
+			msg = "恭喜你打過了" + patternResult.getTarget() + "!";
+		say(chID, msg);
 	} else if (reviewResult.value) say(chID, reviewResult.msg);
 	else if (stuckResult.value) say(chID, stuck.msg);
 	else if (steamResult) say(chID, steamResult.title + "\n" + steamResult.link);
 	else if (findGNNResult) say(chID, findGNNResult.link);
-    else if (playingResult.value) say(chID, playingResult.msg);
     else if (greetingResult.value) say(chID, greetingResult.msg);
     else if (endingResult.value) say(chID, endingResult.msg);
 	else {

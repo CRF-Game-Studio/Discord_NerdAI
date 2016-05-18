@@ -43,10 +43,11 @@ Pattern.prototype.loadFile = function(file) {
 }
 
 Pattern.prototype.matchPattern = function (msg) {
-	var matchResult, flag, obj = {};
-	for (var i in this.pattern) {
-		matchResult = []; flag = false;
-		for (var j in this.pattern[i]) {
+	var matchResult, flag, obj = {}, msgBaked = msg;
+	for (var i in this.pattern) { // 檢查每個句型
+		msg = msgBaked;	// 初始化訊息
+		matchResult = []; flag = false; // 初始化回傳結果
+		for (var j in this.pattern[i]) { // 檢查每個Slot
 			var result = this.matchSlot(msg, i, j);
 			if (result.match) {
 				matchResult[j] = result.slot;
@@ -58,11 +59,19 @@ Pattern.prototype.matchPattern = function (msg) {
 		}
 		if (!flag) {
 			obj.result = this.result[i];
+			obj.type = this.type[i];
 			break;
 		}
 	}
+	obj.getTarget = function (n) {
+		n = n || 1;
+		for (var i in obj.type) {
+			if (obj.type[i] == "@") n--;
+			if (!n) return obj.slot[i];
+		}
+	}
 	obj.match = !flag;
-	obj.slot = matchResult; 
+	obj.slot = matchResult;
 	return obj;
 }
 
@@ -102,8 +111,9 @@ Pattern.prototype.matchSlot = function (str, iPattern, iSlot) {
 			}
 		}	
 	}
+	
 	return result;
 }
 module.exports = new Pattern;
 var p = new Pattern;
-console.log(p.matchPattern("IMAS好難"));
+console.log(p.matchPattern("我把杏之歌full掉了"));
