@@ -74,7 +74,12 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			m = "恭喜你打過了" + patternResult.getTarget() + "!";
 			say(chID, m);
 			m = "可以教我嗎? ";
-		}	
+		} else if (patternResult.result == "GameDeal") {
+			m = "你是在詢問" + patternResult.getTarget() + "的特價資訊嗎?\n";
+			var sale = steamSales.findSales(patternResult.getTarget());
+			if (sale) m += sale.title + "\n" + sale.link;
+			else m += patternResult.getTarget() + "最近好像沒有優惠欸";
+		}
 		subject = patternResult.getTarget();
 		say(chID, m);
 	} else if (reviewResult.value) say(chID, reviewResult.msg);
