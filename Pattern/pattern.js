@@ -37,15 +37,15 @@ Pattern.prototype.loadPattern = function() {
 	}
 }
 
-Pattern.prototype.loadFile = function(file) {
-	var file = fs.readFileSync(file, "utf-8");
+Pattern.prototype.loadFile = function(f) {
+	var file = fs.readFileSync(f, "utf-8");
 	return file.split(" ");
 }
 
 Pattern.prototype.matchPattern = function (msg) {
-	var matchResult, flag, obj = {};
+	var matchResult, flag, obj = {}, oMsg = msg;
 	for (var i in this.pattern) {
-		matchResult = []; flag = false;
+		matchResult = []; flag = false; msg = oMsg;
 		for (var j in this.pattern[i]) {
 			var result = this.matchSlot(msg, i, j);
 			if (result.match) {

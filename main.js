@@ -33,13 +33,13 @@ function discordReady() {
 
 function discordMsg(user, userID, chID, msg, rawEvent) {
 	if (!isProcessRequire(user, userID, chID)) return;
-    if (msg.toLowerCase().includes("count"))
-        return say(chID, msgCount(user, userID, msg.substr(6, msg.length - 7)));
-    addLog(userID, msg);
+	if (msg.toLowerCase().includes("count"))
+		return say(chID, msgCount(user, userID, msg.substr(6, msg.length - 7)));
+	addLog(userID, msg);
 	
 	var greetingResult = greeting.greeting(msg);
 	var endingResult = ending.ending(msg);
-    var playingResult = playing.playing(msg);
+	var playingResult = playing.playing(msg);
 	var findGNNResult = findGNN.findGNN(msg);
 	var steamResult = steamSales.findSales(msg);
 	var reviewResult = review.review(msg);
@@ -53,7 +53,9 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 		else if (patternResult.result == "GameStuck")
 			say(chID, "你是在說" + patternResult.slot[0] + "怎麼打都" + patternResult.slot[2] + "嗎？");
 		else if (patternResult.result == "GameInfo")
-			say(chID, "你是說" + patternResult.slot[0] + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎？");	
+			say(chID, "你是說[" + patternResult.slot[1] + "]最近出了" + patternResult.slot[4] + patternResult.slot[5] + "嗎？");
+		else if (patternResult.result == "GameTest")
+			say(chID, "我知道[" + patternResult.slot[1] + "]最近出了" + patternResult.slot[4] + patternResult.slot[5]);	
 	} else if (reviewResult.value) say(chID, reviewResult.msg);
 	else if (stuckResult.value) say(chID, stuck.msg);
 	else if (steamResult) say(chID, steamResult.title + "\n" + steamResult.link);
