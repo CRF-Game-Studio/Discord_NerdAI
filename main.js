@@ -57,7 +57,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	var reviewResult = review.review(msg);
 	var stuckResult = stuck.stuck(msg);
 	var patternResult = pattern.matchPattern(msg);
-	
+	console.log(greetingResult);
 	console.log(patternResult);
 	var m, type, subject;
 	if (patternResult.match == true) {

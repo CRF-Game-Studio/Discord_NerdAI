@@ -15,6 +15,7 @@ Pattern.prototype.initialize = function () {
 
 Pattern.prototype.loadPattern = function() {
 	var pattern = fs.readFileSync("pattern.dat", "utf-8");
+	pattern = pattern.trim();
 	pattern = pattern.split("\r\n");
 	for (var i in pattern) {
 		pattern[i] = pattern[i].split(" ");
@@ -58,6 +59,7 @@ Pattern.prototype.matchPattern = function (msg) {
 			}
 		}
 		if (!flag) {
+			console.log(i);
 			obj.result = this.result[i];
 			obj.type = this.type[i];
 			break;
@@ -115,5 +117,5 @@ Pattern.prototype.matchSlot = function (str, iPattern, iSlot) {
 	return result;
 }
 module.exports = new Pattern;
-// var p = new Pattern;
-// console.log(p.matchPattern("我把杏之歌full掉了"));
+var p = new Pattern;
+console.log(p.matchPattern("嗨"));
