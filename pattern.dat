@@ -2,6 +2,7 @@
 -GameDifficult @game &非正程度副詞 &簡易形容詞
 -GameStuck #我 @game |都,各種 #打不過,破不了,full不掉,一直死
 -GameInfo @game &時間副詞 #出了,推出 #新 #系統,角色,職業,卡片,寵物
+-GameInfo #你知道 @game &時間副詞 #出了,推出 #新 #系統,角色,職業,卡片,寵物
 -GamePlay #我把 @game #full掉,p掉,打過 |了
 -GamePlay #我 #full掉,p掉,打過 @game |了
 -GameDeal @game &時間副詞 #有 #在特價,在打折,優惠 #嗎
