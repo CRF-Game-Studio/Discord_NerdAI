@@ -41,7 +41,13 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
         return say(chID, msgLog.msgCount(user, userID, msg.substring(6)));
 
 	clearTimeout(LOO_Call[userID]);
-	if (msg != "over" && msgLog.getLastLogType(userID) == "GamePlay") {
+	var patternResult = pattern.matchPattern(msg);
+	if (patternResult.result == "GamePlayRefuse" && (msgLog.getLastLogType(userID) == "GamePlayBegin" || msgLog.getLastLogType(userID) == "GamePlayRefuse")) {
+		msgLog.addLog(userID, msg, "GamePlayRefuse", "@refuse");
+		say(chID, pattern.getResponse("GamePlayLoo"));
+		return;
+	}
+	if (msg != "over" && (msgLog.getLastLogType(userID) == "GamePlay" || msgLog.getLastLogType(userID) == "GamePlayBegin")) {
 		LOO_Call[userID] = setTimeout(() => { LOO(10, chID, userID) }, 10000);
 		msgLog.addLog(userID, msg, "GamePlay", "@last");
 		while (msg.includes("我")) msg = msg.replace("我", "他");
@@ -60,7 +66,6 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	var steamResult = steamSales.findSales(msg);
 	var reviewResult = review.review(msg);
 	var stuckResult = stuck.stuck(msg);
-	var patternResult = pattern.matchPattern(msg);
 	
 	var m, type, subject;
 	if (patternResult.match == true) {
@@ -77,6 +82,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			m = "你是說" + patternResult.getTarget() + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎?";
 		else if (patternResult.result == "GamePlay") {
 			m = "恭喜你打過了" + patternResult.getTarget() + "!\n可以教我嗎? ";
+			type = "GamePlayBegin";
 		} else if (patternResult.result == "GameDeal") {
 			m = "你是在詢問" + patternResult.getTarget() + "的特價資訊嗎?\n";
 			var sale = steamSales.findSales(patternResult.getTarget("game"));
@@ -95,6 +101,9 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			for (var i = 1; i < arr.length - 1; i++)
 				m += "、" + arr[i];
 			m += "和" + arr[arr.length - 1] + "的特價資訊";
+		} else if (patternResult.result == "GamePlayRefuse") {
+			console.log("Refuse");
+			m = "不要就不要";
 		}
 		subject = patternResult.getTarget();
 		say(chID, m);

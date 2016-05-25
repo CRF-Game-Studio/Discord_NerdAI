@@ -11,5 +11,5 @@
 -GameDeal &時間副詞 @game #有 |在 &DEAL #嗎
 -GameDiscount #Daily #Deal #- @game &逗號 @discount #% #Off
 -GameDealAsk #你還記得我問過 #那,哪 #些 &DEAL #嗎
--GamePlayRefuse &拒絕
+-GamePlayRefuse |我 &拒絕
 -GamePlayRefuse |才 #不告訴 #你,逆 #勒,哩,雷

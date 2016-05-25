@@ -88,7 +88,7 @@ Pattern.prototype.matchPattern = function (msg) {
 			if (result.match) {
 				matchResult[j] = result.slot;
 				msg = msg.substring(result.slot.length).trim();
-				// console.log(msg);
+				console.log(i, msg);
 			} else {
 				flag = true;
 				break;
@@ -175,6 +175,7 @@ module.exports = new Pattern;
 var p = new Pattern;
 // console.log(p.matchPattern("Daily Deal - Lord of the Rings: War in the North, 75% Off").getTarget("discount"));
 // console.log(p.pattern);
-var rrr = p.matchPattern("我覺得PP好難");
-var ss = p.getResponse(rrr.result, rrr);
-console.log("[", ss, "]");
+// var rrr = p.matchPattern("我覺得PP好難");
+// var ss = p.getResponse(rrr.result, rrr);
+// console.log("[", ss, "]");
+console.log(p.matchPattern("不要"));
