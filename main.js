@@ -44,6 +44,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	if (msg != "over" && msgLog.getLastLogType(userID) == "GamePlay") {
 		LOO_Call[userID] = setTimeout(() => { LOO(10, chID, userID) }, 10000);
 		msgLog.addLog(userID, msg, "GamePlay", "@last");
+		while (msg.includes("我")) msg = msg.replace("我", "他");
 		guideRecord.addGuide(msgLog.getLastSubject(userID), user, msg);
 		return;
 	} else if (msg == "over") {
@@ -65,11 +66,11 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	if (patternResult.match == true) {
 		type = patternResult.result;
 		if (patternResult.result == "GameDifficult")
-			m = "你是在說" + patternResult.getTarget() + "的難度" + patternResult.slot[1] + patternResult.slot[2] + "嗎?";
+			m = pattern.getResponse(patternResult.result, patternResult);
 		else if (patternResult.result == "GameStuck") {
 			var tGame = patternResult.getTarget();
 			if (guideRecord.guide[tGame])
-				m =  guideRecord.provide[tGame][0] + "說他打過了：" + SentenceConcat(guideRecord.guide[tGame][guideRecord.provide[tGame][0]]);
+				m =  guideRecord.provide[tGame][0] + "說他打過了，" + SentenceConcat(guideRecord.guide[tGame][guideRecord.provide[tGame][0]]);
 			else
 				m = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎?";
 		} else if (patternResult.result == "GameInfo")
@@ -118,11 +119,9 @@ function LOO(n, chID, userID) {
 }
 
 function SentenceConcat(str) {
-	var msg = str[0];
-	for (var i in str) {
-		if (i == 0) continue;
+	var msg = "";
+	for (var i in str)
 		msg += "，" + str[i];
-	}
 	return msg;
 }
 

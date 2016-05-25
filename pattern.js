@@ -1,5 +1,5 @@
 var fs = require('fs');
-
+var rnd = require('./Rand.js');
 function Pattern() {
 	this.initialize.apply(this, arguments);
 }
@@ -11,9 +11,6 @@ Pattern.prototype.initialize = function () {
 	this.type = []; // pattern slot type
 	this.result = []; // patter type
 	this.response = {};
-	this.response.pattern = [];
-	this.response.type = [];
-	this.response.result = [];
 	this.loadPattern();
 	this.loadResponse();
 }
@@ -63,12 +60,17 @@ Pattern.prototype.loadResponse = function() {
 			else if (pattern[i][j][0] == '|')
 				patternArr[j - 1] = pattern[i][j].substring(1).split(",");
 			else if (pattern[i][j][0] == '-')
-				patternType = this.response.result[i] = pattern[i][j].substring(1);
+				patternType = pattern[i][j].substring(1);
 			else if (pattern[i][j][0] == '@')
 				patternArr[j - 1] = pattern[i][j].substring(1);
 		}
-		
+		this.response[patternType] = this.response[patternType] || {};
+		this.response[patternType].pattern = this.response[patternType].pattern || []; 
+		this.response[patternType].pattern.push(patternArr);
+		this.response[patternType].type = this.response[patternType].type || []; 
+		this.response[patternType].type.push(typeArr);
 	}
+	// console.log(this.response["GameDifficult"]);
 }
 
 Pattern.prototype.loadFile = function(file) {
@@ -154,8 +156,25 @@ Pattern.prototype.matchSlot = function (str, iPattern, iSlot) {
 	
 	return result;
 }
+
+Pattern.prototype.getResponse = function (type, result) {
+	if (!type) return;
+	if (!this.response[type]) return;
+	
+	var m = "", rRes = rnd(this.response[type].pattern.length);
+	console.log(this.response[type].pattern[rRes], rRes);
+	for (var i in this.response[type].pattern[rRes]) {
+		// console.log(this.response[type].type[rRes][i]);
+		if (this.response[type].type[rRes][i] == "@") m += result.getTarget(this.response[type].pattern[rRes][i]);
+		else m += this.response[type].pattern[rRes][i][rnd(this.response[type].pattern[rRes][i].length)];
+		//m += this.response[type].pattern[rRes][i][0];
+	}
+	return m;
+}
 module.exports = new Pattern;
 var p = new Pattern;
 // console.log(p.matchPattern("Daily Deal - Lord of the Rings: War in the North, 75% Off").getTarget("discount"));
 // console.log(p.pattern);
-// console.log(p.matchPattern("最近Diablo有在特價嗎?"));
+var rrr = p.matchPattern("我覺得PP好難");
+var ss = p.getResponse(rrr.result, rrr);
+console.log("[", ss, "]");

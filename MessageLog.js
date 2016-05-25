@@ -33,10 +33,12 @@ MessageLog.prototype.writeLog = function () {
 
 MessageLog.prototype.loadLog = function () {
 	var m = fs.readFileSync("msg.log", "utf-8");
-	m = JSON.parse(m);
-	this.msg = m.msg;
-	this.type = m.type;
-	this.subject = m.subject;
+	if (m) {
+		m = JSON.parse(m);
+		this.msg = m.msg;
+		this.type = m.type;
+		this.subject = m.subject;
+	}	
 }
 
 MessageLog.prototype.getLastLogType = function (id) {
