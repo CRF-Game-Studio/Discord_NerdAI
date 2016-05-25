@@ -7,14 +7,20 @@ function Pattern() {
 Pattern.prototype.constructor = Pattern;
 
 Pattern.prototype.initialize = function () {
-	this.pattern = [];
-	this.type = [];
-	this.result = [];
+	this.pattern = []; // pattern
+	this.type = []; // pattern slot type
+	this.result = []; // patter type
+	this.response = {};
+	this.response.pattern = [];
+	this.response.type = [];
+	this.response.result = [];
 	this.loadPattern();
+	this.loadResponse();
 }
 
 Pattern.prototype.loadPattern = function() {
 	var pattern = fs.readFileSync("pattern.dat", "utf-8");
+	var onlyComma = ["", ""];
 	pattern = pattern.trim();
 	pattern = pattern.split("\r\n");
 	for (var i in pattern) {
@@ -33,8 +39,35 @@ Pattern.prototype.loadPattern = function() {
 			else if (pattern[i][j][0] == '-')
 				this.result[i] = pattern[i][j].substring(1);
 			else if (pattern[i][j][0] == '@')
-				this.pattern[i][j - 1] = pattern[i][j].substring(1);	
+				this.pattern[i][j - 1] = pattern[i][j].substring(1);
 		}
+	}
+}
+
+Pattern.prototype.loadResponse = function() {
+	var pattern = fs.readFileSync("response.dat", "utf-8");
+	var onlyComma = ["", ""];
+	pattern = pattern.trim();
+	pattern = pattern.split("\r\n");
+	for (var i in pattern) {
+		var patternType;
+		var patternArr = [], typeArr = [];
+		pattern[i] = pattern[i].split(" ");
+		for (var j in pattern[i]) {
+			parseInt(j);
+			if (j != 0) typeArr[j - 1] = pattern[i][j][0];
+			if (pattern[i][j][0] == '&')
+				patternArr[j - 1] = this.loadFile(pattern[i][j].substring(1));
+			else if (pattern[i][j][0] == '#')
+				patternArr[j - 1] = pattern[i][j].substring(1).split(",");
+			else if (pattern[i][j][0] == '|')
+				patternArr[j - 1] = pattern[i][j].substring(1).split(",");
+			else if (pattern[i][j][0] == '-')
+				patternType = this.response.result[i] = pattern[i][j].substring(1);
+			else if (pattern[i][j][0] == '@')
+				patternArr[j - 1] = pattern[i][j].substring(1);
+		}
+		
 	}
 }
 
@@ -52,28 +85,33 @@ Pattern.prototype.matchPattern = function (msg) {
 			var result = this.matchSlot(msg, i, j);
 			if (result.match) {
 				matchResult[j] = result.slot;
-				msg = msg.substring(result.slot.length);
+				msg = msg.substring(result.slot.length).trim();
+				// console.log(msg);
 			} else {
 				flag = true;
 				break;
 			}
 		}
 		if (!flag) {
-			console.log(i);
 			obj.result = this.result[i];
 			obj.type = this.type[i];
+			obj.pattern = this.pattern[i];
 			break;
-		}
-	}
-	obj.getTarget = function (n) {
-		n = n || 1;
-		for (var i in obj.type) {
-			if (obj.type[i] == "@") n--;
-			if (!n) return obj.slot[i];
 		}
 	}
 	obj.match = !flag;
 	obj.slot = matchResult;
+	obj.getTarget = function (n) {
+		if (n == undefined) {
+			for (var i in obj.type) {
+				if (obj.type[i] == "@") return obj.slot[i];
+			}
+		} else {
+			for (var i in obj.slot) {
+				if (obj.type[i] == "@" && obj.pattern[i] == n) return obj.slot[i];
+			}	
+		}
+	}
 	return obj;
 }
 
@@ -118,4 +156,6 @@ Pattern.prototype.matchSlot = function (str, iPattern, iSlot) {
 }
 module.exports = new Pattern;
 var p = new Pattern;
-console.log(p.matchPattern("嗨"));
+// console.log(p.matchPattern("Daily Deal - Lord of the Rings: War in the North, 75% Off").getTarget("discount"));
+// console.log(p.pattern);
+// console.log(p.matchPattern("最近Diablo有在特價嗎?"));

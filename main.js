@@ -38,7 +38,7 @@ var LOO_Call = {};
 function discordMsg(user, userID, chID, msg, rawEvent) {
 	if (!isProcessRequire(user, userID, chID)) return;
     if (msg.toLowerCase().includes("count"))
-        return say(chID, msgCount(user, userID, msg.substr(6, msg.length - 7)));
+        return say(chID, msgLog.msgCount(user, userID, msg.substring(6)));
 
 	clearTimeout(LOO_Call[userID]);
 	if (msg != "over" && msgLog.getLastLogType(userID) == "GamePlay") {
@@ -69,7 +69,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 		else if (patternResult.result == "GameStuck") {
 			var tGame = patternResult.getTarget();
 			if (guideRecord.guide[tGame])
-				m =  guideRecord.provide[tGame][0] + "說他打過了：" + guideRecord.guide[tGame][guideRecord.provide[tGame][0]].concat();
+				m =  guideRecord.provide[tGame][0] + "說他打過了：" + SentenceConcat(guideRecord.guide[tGame][guideRecord.provide[tGame][0]]);
 			else
 				m = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎?";
 		} else if (patternResult.result == "GameInfo")
@@ -78,9 +78,22 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			m = "恭喜你打過了" + patternResult.getTarget() + "!\n可以教我嗎? ";
 		} else if (patternResult.result == "GameDeal") {
 			m = "你是在詢問" + patternResult.getTarget() + "的特價資訊嗎?\n";
-			var sale = steamSales.findSales(patternResult.getTarget());
-			if (sale) m += sale.title + "\n" + sale.link;
-			else m += patternResult.getTarget() + "最近好像沒有優惠欸";
+			var sale = steamSales.findSales(patternResult.getTarget("game"));
+			if (sale) {
+				var saleMatch = pattern.matchPattern(sale.title); 
+				var gameName = pattern.matchPattern(sale.title).getTarget("game");
+				var discount = pattern.matchPattern(sale.title).getTarget("discount");
+				console.log(saleMatch);
+				m += gameName + "特價優惠" + num2cht((100 - parseInt(discount)).toString()) + "折\n" + sale.link;
+			} else m += patternResult.getTarget() + "最近好像沒有優惠欸";
+		} else if (patternResult.result == "GameDealAsk") {
+			var arr = [];
+			for (var i in msgLog.type[userID])
+				if (msgLog.type[userID][i] == "GameDeal") arr.push(msgLog.subject[userID][i]);
+			m = "你問了" + arr[0];
+			for (var i = 1; i < arr.length - 1; i++)
+				m += "、" + arr[i];
+			m += "和" + arr[arr.length - 1] + "的特價資訊";
 		}
 		subject = patternResult.getTarget();
 		say(chID, m);
@@ -102,6 +115,15 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 function LOO(n, chID, userID) {
 	say(chID, "然後呢?");
 	LOO_Call[userID] = setTimeout(() => { LOO(n * 2, chID, userID) }, n * 2000);
+}
+
+function SentenceConcat(str) {
+	var msg = str[0];
+	for (var i in str) {
+		if (i == 0) continue;
+		msg += "，" + str[i];
+	}
+	return msg;
 }
 
 function isProcessRequire(user, userID, chID) {

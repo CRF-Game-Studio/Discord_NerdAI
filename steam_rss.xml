@@ -4,10 +4,11 @@
 		<link>http://www.steampowered.com/</link> 
 		<description>All Steam news, all the time!</description> 
 		<language>en</language> 
-				<pubDate>Tue, 24 May 2016 10:00:00 -0700</pubDate>
+				<pubDate>Wed, 25 May 2016 10:00:00 -0700</pubDate>
 		<generator>http://www.steampowered.com/</generator> 
 		<items>
 			<rdf:Seq>
+							<rdf:li rdf:resource="http://store.steampowered.com/news/21998/" />
 							<rdf:li rdf:resource="http://store.steampowered.com/news/21997/" />
 							<rdf:li rdf:resource="http://store.steampowered.com/news/21994/" />
 							<rdf:li rdf:resource="http://store.steampowered.com/news/21975/" />
@@ -1545,6 +1546,23 @@
 						</rdf:Seq>
 		</items>
 	</channel>
+					<item rdf:about="http://store.steampowered.com/news/21998/">
+			<title><![CDATA[Daily Deal - Oddworld: New 'n' Tasty, 60% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/21998/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/21998/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Wed, 25 May 2016 10:00:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-05-25T10:00:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>314660</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 60% on <a href='http://store.steampowered.com/app/314660/'>Oddworld: New 'n' Tasty</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Friday at 10AM Pacific Time<br><a href="http://store.steampowered.com/app/314660/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/314660/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="http://cdn.akamai.steamstatic.com/steam/apps/314660/capsule_467x181.jpg" length="0" type="image/jpeg"/>
+					</item>
 					<item rdf:about="http://store.steampowered.com/news/21997/">
 			<title><![CDATA[Daily Deal - Lord of the Rings: War in the North, 75% Off]]></title>
 			<link><![CDATA[http://store.steampowered.com/news/21997/]]></link>
