@@ -37,8 +37,8 @@ Pattern.prototype.loadPattern = function() {
 	}
 }
 
-Pattern.prototype.loadFile = function(f) {
-	var file = fs.readFileSync(f, "utf-8");
+Pattern.prototype.loadFile = function(file) {
+	var file = fs.readFileSync(file, "utf-8");
 	return file.split(" ");
 }
 
