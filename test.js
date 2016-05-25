@@ -1,4 +1,4 @@
-function foo(str) {
+exports.foo = function(str) {
 	switch (parseInt(str)) {
 		case 1: return "一";
 		case 2: return "二";
@@ -12,4 +12,3 @@ function foo(str) {
 	}	
 }
 
-console.log(foo("1"));

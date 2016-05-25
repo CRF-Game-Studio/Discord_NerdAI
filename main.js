@@ -14,6 +14,7 @@ var stuck = require('./stuck.js');
 var msgLog = require('./MessageLog.js');
 var pattern = require('./pattern.js');
 var guideRecord = require('./GuideRecord.js');
+var num2cht = require('./NumToCht.js');
 
 bot.on('ready', discordReady);
 bot.on('message', discordMsg);
@@ -31,7 +32,9 @@ function discordReady() {
     downloadXML();
 	downloadSteamRSS();
 }
+
 var LOO_Call = {};
+
 function discordMsg(user, userID, chID, msg, rawEvent) {
 	if (!isProcessRequire(user, userID, chID)) return;
     if (msg.toLowerCase().includes("count"))
@@ -57,8 +60,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	var reviewResult = review.review(msg);
 	var stuckResult = stuck.stuck(msg);
 	var patternResult = pattern.matchPattern(msg);
-	console.log(greetingResult);
-	console.log(patternResult);
+	
 	var m, type, subject;
 	if (patternResult.match == true) {
 		type = patternResult.result;
@@ -146,7 +148,6 @@ function downloadXML() {
     var request = http.get("http://gnn.gamer.com.tw/rss.xml", function(response) {
         response.pipe(file);
     })
-	
 }
 
 function downloadSteamRSS() {
