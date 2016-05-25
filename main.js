@@ -31,13 +31,15 @@ function discordReady() {
     downloadXML();
 	downloadSteamRSS();
 }
-
+var LOO_Call = {};
 function discordMsg(user, userID, chID, msg, rawEvent) {
 	if (!isProcessRequire(user, userID, chID)) return;
     if (msg.toLowerCase().includes("count"))
         return say(chID, msgCount(user, userID, msg.substr(6, msg.length - 7)));
-	
+
+	clearTimeout(LOO_Call[userID]);
 	if (msg != "over" && msgLog.getLastLogType(userID) == "GamePlay") {
+		LOO_Call[userID] = setTimeout(() => { LOO(10, chID, userID) }, 10000);
 		msgLog.addLog(userID, msg, "GamePlay", "@last");
 		guideRecord.addGuide(msgLog.getLastSubject(userID), user, msg);
 		return;
@@ -67,13 +69,11 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			if (guideRecord.guide[tGame])
 				m =  guideRecord.provide[tGame][0] + "說他打過了：" + guideRecord.guide[tGame][guideRecord.provide[tGame][0]].concat();
 			else
-				m = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎？";
+				m = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎?";
 		} else if (patternResult.result == "GameInfo")
-			m = "你是說" + patternResult.getTarget() + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎？";
+			m = "你是說" + patternResult.getTarget() + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎?";
 		else if (patternResult.result == "GamePlay") {
-			m = "恭喜你打過了" + patternResult.getTarget() + "!";
-			say(chID, m);
-			m = "可以教我嗎? ";
+			m = "恭喜你打過了" + patternResult.getTarget() + "!\n可以教我嗎? ";
 		} else if (patternResult.result == "GameDeal") {
 			m = "你是在詢問" + patternResult.getTarget() + "的特價資訊嗎?\n";
 			var sale = steamSales.findSales(patternResult.getTarget());
@@ -90,11 +90,16 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
     else if (endingResult.value) say(chID, endingResult.msg);
 	else {
 		msg = changeView(msg);
-		say(chID, "為什麼你覺得" + msg + "？");
+		say(chID, "為什麼你覺得" + msg + "?");
 	}
 	
 	msgLog.addLog(userID, msg, type, subject);
 	msgLog.print();
+}
+
+function LOO(n, chID, userID) {
+	say(chID, "然後呢?");
+	LOO_Call[userID] = setTimeout(() => { LOO(n * 2, chID, userID) }, n * 2000);
 }
 
 function isProcessRequire(user, userID, chID) {
