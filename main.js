@@ -43,12 +43,12 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	clearTimeout(LOO_Call[userID]);
 	var patternResult = pattern.matchPattern(msg);
 	if (patternResult.result == "GamePlayRefuse" && (msgLog.getLastLogType(userID) == "GamePlayBegin" || msgLog.getLastLogType(userID) == "GamePlayRefuse")) {
-		msgLog.addLog(userID, msg, "GamePlayRefuse", "@refuse");
+		msgLog.addLog(userID, msg, "GamePlayRefuse", "@last");
 		say(chID, pattern.getResponse("GamePlayLoo"));
 		return;
 	}
 	if (patternResult.result == "Accept" && msgLog.getLastLogType(userID) == "GamePlayRefuse") {
-		msgLog.addLog(userID, msg, "Accept", "@accept");
+		msgLog.addLog(userID, msg, "Accept", "@last");
 		say(chID, pattern.getResponse("Thanks"));
 		return;
 	}
@@ -80,7 +80,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 		else if (patternResult.result == "GameStuck") {
 			var tGame = patternResult.getTarget();
 			if (guideRecord.guide[tGame])
-				m =  guideRecord.provide[tGame][0] + "說他打過了，" + SentenceConcat(guideRecord.guide[tGame][guideRecord.provide[tGame][0]]);
+				m =  guideRecord.provide[tGame][0] + "說他打過了" + SentenceConcat(guideRecord.guide[tGame][guideRecord.provide[tGame][0]]);
 			else
 				m = "你是說你" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎?";
 		} else if (patternResult.result == "GameInfo")
