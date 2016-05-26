@@ -47,7 +47,12 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 		say(chID, pattern.getResponse("GamePlayLoo"));
 		return;
 	}
-	if (msg != "over" && (msgLog.getLastLogType(userID) == "GamePlay" || msgLog.getLastLogType(userID) == "GamePlayBegin")) {
+	if (patternResult.result == "Accept" && msgLog.getLastLogType(userID) == "GamePlayRefuse") {
+		msgLog.addLog(userID, msg, "Accept", "@accept");
+		say(chID, pattern.getResponse("Thanks"));
+		return;
+	}
+	if (msg != "over" && (msgLog.getLastLogType(userID) == "GamePlay" || msgLog.getLastLogType(userID) == "GamePlayBegin" || msgLog.getLastLogType(userID) == "Accept")) {
 		LOO_Call[userID] = setTimeout(() => { LOO(10, chID, userID) }, 10000);
 		msgLog.addLog(userID, msg, "GamePlay", "@last");
 		while (msg.includes("我")) msg = msg.replace("我", "他");
@@ -77,7 +82,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			if (guideRecord.guide[tGame])
 				m =  guideRecord.provide[tGame][0] + "說他打過了，" + SentenceConcat(guideRecord.guide[tGame][guideRecord.provide[tGame][0]]);
 			else
-				m = "你是在說" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎?";
+				m = "你是說你" + patternResult.getTarget() + "怎麼打都" + patternResult.slot[3] + "嗎?";
 		} else if (patternResult.result == "GameInfo")
 			m = "你是說" + patternResult.getTarget() + "最近出了" + patternResult.slot[3] + patternResult.slot[4] + "嗎?";
 		else if (patternResult.result == "GamePlay") {
