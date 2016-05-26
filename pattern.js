@@ -178,4 +178,4 @@ var p = new Pattern;
 // var rrr = p.matchPattern("我覺得PP好難");
 // var ss = p.getResponse(rrr.result, rrr);
 // console.log("[", ss, "]");
-console.log(p.matchPattern("不要"));
+console.log(p.matchPattern("我不要"));
