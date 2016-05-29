@@ -21,8 +21,8 @@ bot.on('message', discordMsg);
 
 function getNewDcClient() {
 	var client = {};
-	client.email = "00357027@ntou.edu.tw";
-	client.password = "rpgmaker2003";
+	client.email =;
+	client.password = "";
 	client.autorun = true;
 	return client;
 }
