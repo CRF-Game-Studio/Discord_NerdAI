@@ -22,11 +22,21 @@ function GNN() {
 			obj[i].title = m[i].title[0];
 			obj[i].link = m[i].link;
 			obj[i].subject = [];
+			obj[i].subjectType = [];
+			obj[i].subjectEng = obj[i].subjectNotEng = 0;
 			var s1, Symbol = "~!@#$%^&*()_+|？！～：:";
 			s1 = m[i].title[0].substring(tt.indexOf("《") + 1, tt.indexOf("》")).toLowerCase()
 			for (var j in Symbol)
 				while (s1.includes(Symbol[j])) s1 = s1.replace(Symbol[j], " ");
 			s1 = s1.split(" ");
+			for (var j in s1)
+				if (s1[0].search(/[^A-Za-z0-9\s]/) != -1) {
+					obj[i].subjectType[j] = 0;
+					obj[i].subjectNotEng++;
+				} else {
+					obj[i].subjectType[j] = 1;
+					obj[i].subjectEng++;
+				}
 			obj[i].subject = s1;
 		}
 		this.news = obj;
@@ -48,28 +58,57 @@ function parseXML() {
 }
 
 GNN.prototype.findGNN = function (msg) {
+	var tag;
 	msg = msg.toLowerCase();
+	if (msg.search(/[^A-Za-z0-9\s]/) != -1) tag = "neng";
+	else tag = "eng";
+	msg = msg.split(" ");
+	console.log(msg);
 	var result = {};
 	for (var i in this.news) {
-		if (this.news[i].title.includes(msg)) {
-			for (var j in this.news[i].subject)
-				if (this.news[i].subject[j] == msg) {
-					result = this.news[i];
-					result.value = 100;
-					return result;
+		if (this.news[i].title.toLowerCase().includes(msg[0])) {
+			var flag = [];
+			for (var k in msg) {
+				for (var j in this.news[i].subject) {
+					if (this.news[i].subject[j] == msg[k]) {
+						flag.push(true);
+						break;
+					}
 				}
+			}
+			console.log(flag);
+			var fflag = false;
+			for (var k in msg) {
+				console.log(flag[k]);
+				if (!flag[k]) {
+					fflag = true;
+					break;
+				}
+			}
+			if (!fflag) {
+				result = this.news[i];
+				console.log(tag, msg.length / this.news[i].subjectEng > 0.6);
+				if (tag == "eng") {
+					if (msg.length / this.news[i].subjectEng > 0.6) result.value = 100;
+					else result.value = 80;
+				} else if (tag == "neng") {
+					if (msg.length / this.news[i].subjectNotEng > 0.6) result.value = 100;
+					else result.value = 80;
+				}
+				return result;
+			}
 		}
 	}
 	for (var i in this.news) {
-		if (this.news[i].title.includes(msg)) {
+		if (this.news[i].title.toLowerCase().includes(msg)) {
 			result = this.news[i];
-			result.value = 80;
+			result.value = 60;
 			return result;
 		}
 	}
 }
 module.exports = new GNN;
-// var gg = new GNN;
-// setTimeout(() => {
-// 	console.log(gg.findGNN("SD"));
-// }, 1000);
+var gg = new GNN;
+setTimeout(() => {
+	console.log(gg.findGNN("FRONT"));
+}, 1000);

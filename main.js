@@ -21,8 +21,8 @@ bot.on('message', discordMsg);
 
 function getNewDcClient() {
 	var client = {};
-	client.email = "";
-	client.password = "";
+	client.email = "00357027@ntou.edu.tw";
+	client.password = "rpgmaker2003";
 	client.autorun = true;
 	return client;
 }
@@ -66,7 +66,6 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 	
 	var greetingResult = greeting.greeting(msg);
 	var endingResult = ending.ending(msg);
-	var findGNNResult = findGNN.findGNN(msg);
 	var steamResult = steamSales.findSales(msg);
 	var reviewResult = review.review(msg);
 	var stuckResult = stuck.stuck(msg);
@@ -110,6 +109,7 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			m = "不要就不要";
 		} else if (patternResult.result == "AskGameInfo") {
 			var findGNNResult = findGNN.findGNN(patternResult.getTarget());
+			console.log(findGNNResult);
 			if (findGNNResult && findGNNResult.value > 80) m = "小道消息～\n" + findGNNResult.title + "\n" + findGNNResult.link;
 			else if (findGNNResult) m = "你是指這個嗎?\n" + findGNNResult.title + "\n" + findGNNResult.link;
 			else m = "沒有欸";
