@@ -88,7 +88,7 @@ Pattern.prototype.matchPattern = function (msg) {
 			if (result.match) {
 				matchResult[j] = result.slot;
 				msg = msg.substring(result.slot.length).trim();
-				console.log(i, msg);
+				// console.log(i, msg);
 			} else {
 				flag = true;
 				break;
@@ -162,7 +162,7 @@ Pattern.prototype.getResponse = function (type, result) {
 	if (!this.response[type]) return;
 	
 	var m = "", rRes = rnd(this.response[type].pattern.length);
-	console.log(this.response[type].pattern[rRes], rRes);
+	// console.log(this.response[type].pattern[rRes], rRes);
 	for (var i in this.response[type].pattern[rRes]) {
 		// console.log(this.response[type].type[rRes][i]);
 		if (this.response[type].type[rRes][i] == "@") m += result.getTarget(this.response[type].pattern[rRes][i]);
@@ -178,4 +178,4 @@ var p = new Pattern;
 // var rrr = p.matchPattern("我覺得PP好難");
 // var ss = p.getResponse(rrr.result, rrr);
 // console.log("[", ss, "]");
-console.log(p.matchPattern("我不要"));
+// console.log(p.matchPattern("我不要"));

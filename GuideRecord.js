@@ -9,7 +9,7 @@ GuideRecord.prototype.addGuide = function (game, name, msg) {
 	this.guide[game] = this.guide[game] || {};
 	this.guide[game][name] = this.guide[game][name] || [];
 	this.guide[game][name].push(msg);
-	console.log(this.guide);
+	// console.log(this.guide);
 }
 
 module.exports = new GuideRecord;

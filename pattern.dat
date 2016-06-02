@@ -14,3 +14,6 @@
 -GamePlayRefuse |我 &拒絕
 -GamePlayRefuse |才 #不告訴 #你,逆 #勒,哩,雷
 -Accept &接受
+-GamePlayOver #講完,沒 #了
+-GamePlayOver |大概 #就這樣
+-AskGameInfo #有沒有 @game #的 #八卦,消息,新聞

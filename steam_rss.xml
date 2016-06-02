@@ -4,10 +4,17 @@
 		<link>http://www.steampowered.com/</link> 
 		<description>All Steam news, all the time!</description> 
 		<language>en</language> 
-				<pubDate>Wed, 25 May 2016 10:00:00 -0700</pubDate>
+				<pubDate>Wed, 01 Jun 2016 10:00:00 -0700</pubDate>
 		<generator>http://www.steampowered.com/</generator> 
 		<items>
 			<rdf:Seq>
+							<rdf:li rdf:resource="http://store.steampowered.com/news/22139/" />
+							<rdf:li rdf:resource="http://store.steampowered.com/news/22129/" />
+							<rdf:li rdf:resource="http://store.steampowered.com/news/22025/" />
+							<rdf:li rdf:resource="http://store.steampowered.com/news/22024/" />
+							<rdf:li rdf:resource="http://store.steampowered.com/news/22023/" />
+							<rdf:li rdf:resource="http://store.steampowered.com/news/22022/" />
+							<rdf:li rdf:resource="http://store.steampowered.com/news/21999/" />
 							<rdf:li rdf:resource="http://store.steampowered.com/news/21998/" />
 							<rdf:li rdf:resource="http://store.steampowered.com/news/21997/" />
 							<rdf:li rdf:resource="http://store.steampowered.com/news/21994/" />
@@ -1546,6 +1553,125 @@
 						</rdf:Seq>
 		</items>
 	</channel>
+					<item rdf:about="http://store.steampowered.com/news/22139/">
+			<title><![CDATA[Daily Deal - Syberia Bundle, 80% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/22139/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/22139/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Wed, 01 Jun 2016 10:00:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-06-01T10:00:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>46510</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 80% on <a href='http://store.steampowered.com/sub/8224/'>Syberia Bundle</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Friday at 10AM Pacific Time<br><a href="http://store.steampowered.com/sub/8224/"><img src="https://steamcdn-a.akamaihd.net/steam/news/22139/syberiaheader_ratio.jpg?t=1464722863" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="https://steamcdn-a.akamaihd.net/steam/news/22139/syberiaheader_ratio.jpg?t=1464722863" length="0" type="application/octet-stream"/>
+					</item>
+					<item rdf:about="http://store.steampowered.com/news/22129/">
+			<title><![CDATA[Daily Deal - Sheltered, 33% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/22129/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/22129/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Tue, 31 May 2016 10:01:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-05-31T10:01:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>356040</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 33% on <a href='http://store.steampowered.com/app/356040/'>Sheltered</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Thursday at 10AM Pacific Time<br><a href="http://store.steampowered.com/app/356040/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/356040/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="http://cdn.akamai.steamstatic.com/steam/apps/356040/capsule_467x181.jpg" length="0" type="image/jpeg"/>
+					</item>
+					<item rdf:about="http://store.steampowered.com/news/22025/">
+			<title><![CDATA[Daily Deal - Pixel Piracy, 75% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/22025/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/22025/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Mon, 30 May 2016 10:00:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-05-30T10:00:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>264140</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 75% on <a href='http://store.steampowered.com/app/264140/'>Pixel Piracy</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Wednesday at 10AM Pacific Time<br><a href="http://store.steampowered.com/app/264140/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/264140/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="http://cdn.akamai.steamstatic.com/steam/apps/264140/capsule_467x181.jpg" length="0" type="image/jpeg"/>
+					</item>
+					<item rdf:about="http://store.steampowered.com/news/22024/">
+			<title><![CDATA[Daily Deal - Bastion, 75% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/22024/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/22024/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Sun, 29 May 2016 10:00:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-05-29T10:00:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>107100</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 75% on <a href='http://store.steampowered.com/app/107100/'>Bastion</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Tuesday at 10AM Pacific Time<br><a href="http://store.steampowered.com/app/107100/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/107100/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="http://cdn.akamai.steamstatic.com/steam/apps/107100/capsule_467x181.jpg" length="0" type="image/jpeg"/>
+					</item>
+					<item rdf:about="http://store.steampowered.com/news/22023/">
+			<title><![CDATA[Daily Deal - Distant Worlds: Universe, 60% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/22023/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/22023/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Sat, 28 May 2016 10:00:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-05-28T10:00:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>261470</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 60% on <a href='http://store.steampowered.com/app/261470/'>Distant Worlds: Universe</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Monday at 10AM Pacific Time<br><a href="http://store.steampowered.com/app/261470/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/261470/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="http://cdn.akamai.steamstatic.com/steam/apps/261470/capsule_467x181.jpg" length="0" type="image/jpeg"/>
+					</item>
+					<item rdf:about="http://store.steampowered.com/news/22022/">
+			<title><![CDATA[Daily Deal - Blood & Gold: Caribbean!, 50% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/22022/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/22022/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Fri, 27 May 2016 10:00:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-05-27T10:00:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>413710</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 50% on <a href='http://store.steampowered.com/app/413710/'>Blood &amp; Gold: Caribbean!</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Sunday at 10AM Pacific Time<br><a href="http://store.steampowered.com/app/413710/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/413710/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="http://cdn.akamai.steamstatic.com/steam/apps/413710/capsule_467x181.jpg" length="0" type="image/jpeg"/>
+					</item>
+					<item rdf:about="http://store.steampowered.com/news/21999/">
+			<title><![CDATA[Daily Deal - Goat Simulator, 75% Off]]></title>
+			<link><![CDATA[http://store.steampowered.com/news/21999/]]></link>
+			<guid isPermaLink="true"><![CDATA[http://store.steampowered.com/news/21999/]]></guid>
+			<comments>http://steamcommunity.com//discussions/</comments>
+			<pubDate>Thu, 26 May 2016 10:00:00 -0700</pubDate>
+			<author>Valve</author>
+			<category>Valve news update</category>
+			<dc:subject>Valve news update</dc:subject>
+			<dc:creator>Valve</dc:creator>
+			<dc:date>2016-05-26T10:00:00-0700</dc:date>
+							<steam:appids>
+									<steam:appid>265930</steam:appid>
+								</steam:appids>
+						<content:encoded><![CDATA[Today's Deal: Save 75% on <a href='http://store.steampowered.com/app/265930/'>Goat Simulator</a>!*<br><br>Look for the deals each day on the front page of Steam.  Or follow us on <a href='http://twitter.com/steam_games'>twitter</a> or <a href='http://www.facebook.com/Steam'>Facebook</a> for instant notifications wherever you are!<br><br>*Offer ends Saturday at 10AM Pacific Time<br><a href="http://store.steampowered.com/app/265930/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/265930/capsule_467x181.jpg" style=" float: left; margin-right: 12px; height: 181px; width: 467px;"></a>]]></content:encoded>
+			<enclosure url="http://cdn.akamai.steamstatic.com/steam/apps/265930/capsule_467x181.jpg" length="0" type="image/jpeg"/>
+					</item>
 					<item rdf:about="http://store.steampowered.com/news/21998/">
 			<title><![CDATA[Daily Deal - Oddworld: New 'n' Tasty, 60% Off]]></title>
 			<link><![CDATA[http://store.steampowered.com/news/21998/]]></link>

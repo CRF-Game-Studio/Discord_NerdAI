@@ -27,7 +27,7 @@ MessageLog.prototype.addLog = function (id, msg, type, subject) {
 MessageLog.prototype.writeLog = function () {
 	fs.writeFile("msg.log", JSON.stringify(this), (err) => {
 		if (err) return console.log(err);
-		console.log("Log saved");
+		// console.log("Log saved");
 	})
 }
 
@@ -58,7 +58,7 @@ MessageLog.prototype.print = function () {
 	obj.msg = this.msg;
 	obj.type = this.type;
 	obj.subject = this.subject;
-	console.log(obj);
+	// console.log(obj);
 }
 
 MessageLog.prototype.msgCount = function (user, userID, msg) {

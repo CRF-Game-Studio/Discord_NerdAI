@@ -29,7 +29,6 @@ function getNewDcClient() {
 
 function discordReady() {
 	console.log(bot.username + " - (" + bot.id + ")");
-    downloadXML();
 	downloadSteamRSS();
 }
 
@@ -52,13 +51,13 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 		say(chID, pattern.getResponse("Thanks"));
 		return;
 	}
-	if (msg != "over" && (msgLog.getLastLogType(userID) == "GamePlay" || msgLog.getLastLogType(userID) == "GamePlayBegin" || msgLog.getLastLogType(userID) == "Accept")) {
+	if (patternResult.result != "GamePlayOver" && (msgLog.getLastLogType(userID) == "GamePlay" || msgLog.getLastLogType(userID) == "GamePlayBegin" || msgLog.getLastLogType(userID) == "Accept")) {
 		LOO_Call[userID] = setTimeout(() => { LOO(10, chID, userID) }, 10000);
 		msgLog.addLog(userID, msg, "GamePlay", "@last");
 		while (msg.includes("我")) msg = msg.replace("我", "他");
 		guideRecord.addGuide(msgLog.getLastSubject(userID), user, msg);
 		return;
-	} else if (msg == "over") {
+	} else if (patternResult.result == "GamePlayOver") {
 		say(chID, "謝謝你提供的策略");
 		console.log(guideRecord.game);
 		msgLog.addLog(userID, msg, "GamePlayEnd");
@@ -109,13 +108,18 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 		} else if (patternResult.result == "GamePlayRefuse") {
 			console.log("Refuse");
 			m = "不要就不要";
+		} else if (patternResult.result == "AskGameInfo") {
+			var findGNNResult = findGNN.findGNN(patternResult.getTarget());
+			if (findGNNResult && findGNNResult.value > 80) m = "小道消息～\n" + findGNNResult.title + "\n" + findGNNResult.link;
+			else if (findGNNResult) m = "你是指這個嗎?\n" + findGNNResult.title + "\n" + findGNNResult.link;
+			else m = "沒有欸";
 		}
 		subject = patternResult.getTarget();
 		say(chID, m);
 	} else if (reviewResult.value) say(chID, reviewResult.msg);
 	else if (stuckResult.value) say(chID, stuck.msg);
 	else if (steamResult) say(chID, steamResult.title + "\n" + steamResult.link);
-	else if (findGNNResult) say(chID, findGNNResult.link);
+//	else if (findGNNResult) say(chID, findGNNResult.link);
     else if (greetingResult.value) say(chID, greetingResult.msg);
     else if (endingResult.value) say(chID, endingResult.msg);
 	else {
@@ -178,12 +182,15 @@ function getText() {
     return array;
 }
 
-function downloadXML() {
-    var file = fs.createWriteStream("rss_download.xml");
-    var request = http.get("http://gnn.gamer.com.tw/rss.xml", function(response) {
-        response.pipe(file);
-    })
-}
+// function downloadXML() {
+//     var file = fs.createWriteStream("rss_download.xml");
+//     var request = http.get("http://gnn.gamer.com.tw/rss.xml", function(response) {
+//         response.pipe(file);
+// 		response.on('end', () => {
+// 			console.log("RSS END");
+// 		})
+//     })
+// }
 
 function downloadSteamRSS() {
 	var file = fs.createWriteStream("steam_rss.xml");
