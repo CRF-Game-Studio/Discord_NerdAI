@@ -15,14 +15,15 @@ var msgLog = require('./MessageLog.js');
 var pattern = require('./pattern.js');
 var guideRecord = require('./GuideRecord.js');
 var num2cht = require('./NumToCht.js');
+var dbUserGame = require('./dbUserGame.js');
 
 bot.on('ready', discordReady);
 bot.on('message', discordMsg);
 
 function getNewDcClient() {
 	var client = {};
-	client.email = "00357027@ntou.edu.tw";
-	client.password = "rpgmaker2003";
+	client.email = "";
+	client.password = "";
 	client.autorun = true;
 	return client;
 }
@@ -113,9 +114,14 @@ function discordMsg(user, userID, chID, msg, rawEvent) {
 			if (findGNNResult && findGNNResult.value > 80) m = "小道消息～\n" + findGNNResult.title + "\n" + findGNNResult.link;
 			else if (findGNNResult) m = "你是指這個嗎?\n" + findGNNResult.title + "\n" + findGNNResult.link;
 			else m = "沒有欸";
+		} else if (patternResult.result == "GameFun") {
+			dbUserGame.newRelation(userID, patternResult.getTarget(), chID, say);
+		} else if (patternResult.result == "GameQuery") {
+			m = false;
+			dbUserGame.queryGame(userID, chID, say);
 		}
 		subject = patternResult.getTarget();
-		say(chID, m);
+		if (m) say(chID, m);
 	} else if (reviewResult.value) say(chID, reviewResult.msg);
 	else if (stuckResult.value) say(chID, stuck.msg);
 	else if (steamResult) say(chID, steamResult.title + "\n" + steamResult.link);

@@ -40,7 +40,7 @@ function GNN() {
 			obj[i].subject = s1;
 		}
 		this.news = obj;
-		console.log(this.news);
+		//console.log(this.news);
 		this.init = true;
 	}, 1000);
 }
@@ -108,7 +108,7 @@ GNN.prototype.findGNN = function (msg) {
 	}
 }
 module.exports = new GNN;
-var gg = new GNN;
-setTimeout(() => {
-	console.log(gg.findGNN("FRONT"));
-}, 1000);
+// var gg = new GNN;
+// setTimeout(() => {
+// 	console.log(gg.findGNN("FRONT"));
+// }, 1000);
